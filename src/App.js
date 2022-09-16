@@ -1,27 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
-import Intro from './pages/intro'
+import { BrowserRouter, Routes, Route } from "react-router-dom"
+import Login from '@/pages/Login'
+import Layout from '@/pages/Layout'
+import Home from '@/pages/Home'
+import Article from '@/pages/Article'
+import Publish from '@/pages/Publish'
+import { AuthRoute } from '@/components/AuthRoute'
+import './App.css'
 
-function App() {
+function App () {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-      <Intro title="Intro1111"/>
-    </div>
-  );
+    // 路由配置
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          {/* 创建路由path和组件对应关系 */}
+          {/* 需要鉴权的路由 */}
+          <Route path="/" element={
+            <AuthRoute>
+              <Layout />
+            </AuthRoute>
+          }>
+            {/* 二级路由默认页面 */}
+            <Route index element={<Home />} />
+            <Route path="article" element={<Article />} />
+            <Route path="publish" element={<Publish />} />
+          </Route>
+          {/* 不需要鉴权的路由 */}
+          <Route path="/login" element={<Login />}></Route>
+        </Routes>
+      </div>
+    </BrowserRouter>
+  )
 }
 
-export default App;
+export default App
