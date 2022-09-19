@@ -33,12 +33,13 @@ const menuItems = [
 const PCLayout = () => {
   const location = useLocation()
   const selectedKey = location.pathname
-  const { userStore } = useStore()
+  const { userStore, channelStore } = useStore()
   const { loginStore } = useStore()
   // 获取用户数据
   useEffect(() => {
     try {
       userStore.getUserInfo()
+      channelStore.loadChannelList()
     } catch (e) {
       throw new Error(e)
     }

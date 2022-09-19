@@ -5,12 +5,13 @@ import Home from '@/pages/Home'
 import Article from '@/pages/Article'
 import Publish from '@/pages/Publish'
 import { AuthRoute } from '@/components/AuthRoute'
+import { HistoryRouter, history } from "./utils/history"
 import './App.css'
 
 function App () {
   return (
     // 路由配置
-    <BrowserRouter>
+    <HistoryRouter history={history}>
       <div className="App">
         <Routes>
           {/* 创建路由path和组件对应关系 */}
@@ -29,7 +30,8 @@ function App () {
           <Route path="/login" element={<Login />}></Route>
         </Routes>
       </div>
-    </BrowserRouter>
+    </HistoryRouter>
+
   )
 }
 
